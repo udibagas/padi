@@ -36,6 +36,7 @@ class VillageResource extends Resource
             ->schema([
                 Select::make('sub_district_id')
                     ->relationship('subDistrict', 'name')
+                    ->searchable()
                     ->required()
                     ->label('Sub District')
                     ->live()

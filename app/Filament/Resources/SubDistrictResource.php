@@ -38,6 +38,7 @@ class SubDistrictResource extends Resource
             ->schema([
                 Select::make('city_id')
                     ->relationship('city', 'name')
+                    ->searchable()
                     ->required()
                     ->label('City')
                     ->live()
