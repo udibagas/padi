@@ -36,6 +36,7 @@ class ProvinceResource extends Resource
                 TextInput::make('code')
                     ->required()
                     ->maxLength(2)
+                    ->numeric()
                     ->label('Code'),
                 TextInput::make('name')
                     ->required()

@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('code', 4);
             $table->string('name', 50);
             $table->string('province_code', 2);
-            $table->foreignId('province_id')->constrained();
+            $table->foreignId('province_id')->constrained()->onDelete('cascade');
         });
     }
 

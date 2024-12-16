@@ -7,6 +7,7 @@ use App\Filament\Resources\CityResource\RelationManagers;
 use App\Models\City;
 use App\Models\Province;
 use Filament\Forms;
+use Filament\Forms\Components\Hidden;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
@@ -33,44 +34,40 @@ class CityResource extends Resource
     {
         return $form
             ->schema([
-                TextInput::make('code')
-                    ->required()
-                    ->maxLength(4)
-                    ->label('Code'),
-                TextInput::make('name')
-                    ->required()
-                    ->maxLength(50)
-                    ->label('Name'),
                 Select::make('province_id')
                     ->relationship('province', 'name')
                     ->required()
                     ->label('Province')
                     ->live()
                     ->afterStateUpdated(fn(Set $set, string $state) => $set('province_code', Province::find($state)->code)),
-                TextInput::make('province_code')
+                Hidden::make('province_code')
+                    ->required(),
+                TextInput::make('code')
                     ->required()
-                    ->maxLength(2)
-                    ->readOnly()
-                    ->label('Province Code'),
-
-            ]);
+                    ->maxLength(4)
+                    ->numeric()
+                    ->label('Code'),
+                TextInput::make('name')
+                    ->required()
+                    ->maxLength(50)
+                    ->label('Name'),
+            ])
+            ->columns(1);
     }
 
     public static function table(Table $table): Table
     {
         return $table
             ->columns([
-                TextColumn::make('province_code')
-                    ->sortable()
-                    ->searchable(),
+                TextColumn::make('province.name')
+                    ->searchable()
+                    ->sortable(),
                 TextColumn::make('code')
                     ->sortable()
                     ->searchable(),
                 TextColumn::make('name')
                     ->sortable()
                     ->searchable(),
-                TextColumn::make('province.name')
-                    ->sortable()
             ])
             ->filters([
                 //
