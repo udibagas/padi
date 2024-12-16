@@ -5,6 +5,7 @@ namespace App\Filament\Resources\SubDistrictResource\Pages;
 use App\Filament\Resources\SubDistrictResource;
 use Filament\Actions;
 use Filament\Resources\Pages\ManageRecords;
+use Filament\Support\Enums\MaxWidth;
 
 class ManageSubDistricts extends ManageRecords
 {
@@ -13,7 +14,7 @@ class ManageSubDistricts extends ManageRecords
     protected function getHeaderActions(): array
     {
         return [
-            Actions\CreateAction::make(),
+            Actions\CreateAction::make()->modalWidth(MaxWidth::Medium),
         ];
     }
 }

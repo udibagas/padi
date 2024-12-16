@@ -60,7 +60,7 @@ class ProvinceResource extends Resource
             ->filters([])
             ->actions([
                 ActionGroup::make([
-                    Tables\Actions\EditAction::make(),
+                    Tables\Actions\EditAction::make()->modalWidth(MaxWidth::Medium),
                     Tables\Actions\DeleteAction::make(),
                 ])->icon('heroicon-m-ellipsis-horizontal')
             ])

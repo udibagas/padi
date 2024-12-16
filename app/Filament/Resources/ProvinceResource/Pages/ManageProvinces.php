@@ -5,6 +5,7 @@ namespace App\Filament\Resources\ProvinceResource\Pages;
 use App\Filament\Resources\ProvinceResource;
 use Filament\Actions;
 use Filament\Resources\Pages\ManageRecords;
+use Filament\Support\Enums\MaxWidth;
 
 class ManageProvinces extends ManageRecords
 {
@@ -14,7 +15,7 @@ class ManageProvinces extends ManageRecords
     protected function getHeaderActions(): array
     {
         return [
-            Actions\CreateAction::make(),
+            Actions\CreateAction::make()->modalWidth(MaxWidth::Medium),
         ];
     }
 }

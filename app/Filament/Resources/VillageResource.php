@@ -13,6 +13,7 @@ use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Forms\Set;
 use Filament\Resources\Resource;
+use Filament\Support\Enums\MaxWidth;
 use Filament\Tables;
 use Filament\Tables\Actions\ActionGroup;
 use Filament\Tables\Columns\TextColumn;
@@ -39,18 +40,24 @@ class VillageResource extends Resource
                     ->searchable()
                     ->required()
                     ->label('Sub District')
+                    ->placeholder('Select Sub District')
                     ->live()
                     ->afterStateUpdated(fn(Set $set, string $state) => $set('sub_district_code', SubDistrict::find($state)->code)),
                 Hidden::make('sub_district_code')
                     ->required(),
                 TextInput::make('code')
+                    ->placeholder('Village Code')
+                    ->label('Village Code')
                     ->numeric()
                     ->required()
                     ->maxLength(10),
                 TextInput::make('name')
+                    ->placeholder('Village Name')
+                    ->label('Village Name')
                     ->required()
                     ->maxLength(50),
                 TextInput::make('postal_code')
+                    ->placeholder('Postal Code')
                     ->required()
                     ->maxLength(5),
             ])
@@ -79,7 +86,7 @@ class VillageResource extends Resource
             ])
             ->actions([
                 ActionGroup::make([
-                    Tables\Actions\EditAction::make(),
+                    Tables\Actions\EditAction::make()->modalWidth(MaxWidth::Medium),
                     Tables\Actions\DeleteAction::make(),
                 ])->icon('heroicon-m-ellipsis-horizontal')
             ])
